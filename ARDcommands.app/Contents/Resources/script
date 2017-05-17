@@ -1,0 +1,163 @@
+#!/usr/bin/ruby
+
+#======================================================================================================
+# Version History
+#======================================================================================================
+# version 0.1 - 4.01.2017 - original build
+# version 0.2 - 5.12.2017 - bug fixes
+
+
+current_home = Dir.home
+version_number = "version 0.2"
+updated = "updated 5.12.2017"
+
+#======================================================================================================
+# Start of First Window Dialog
+#======================================================================================================
+
+$:.push(File.dirname($0))
+
+require 'Pashua'
+require './lib/ARDplist'
+include Pashua
+
+
+config = <<EOS
+# Set window title
+*.title = Create A New ARD Command
+
+#===================================================
+txt2.type = text
+txt2.default = #{version_number}
+txt2.x = 47
+txt2.y = 275
+
+txt1.type = text
+txt1.default = #{updated}
+txt1.x = 25
+txt1.y = 255
+
+
+#=== LINE BREAKS ===================================================
+
+line1.type = image
+line1.x = 180
+line1.y = 20
+line1.maxheight = 500
+line1.path = #{File.dirname(__FILE__)}/Pashua.app/Contents/Resources/Line.png
+
+
+#=== Text Fields ===================================================
+
+# foldername
+folder.type = textfield
+folder.label = Folder Name
+folder.width = 300
+folder.option = test
+folder.x = 200
+folder.y = 450
+
+
+# Command Name
+command.type = textfield
+command.label = Commmand Name
+command.width = 300
+command.x = 200
+command.y = 400
+
+# Output Mode
+output.type = textfield
+output.label = Output Mode
+output.default = true
+output.width = 300
+output.x = 200
+output.y = 350
+
+# User
+user.type = textfield
+user.label = user
+user.width = 300
+user.default = root
+user.x = 200
+user.y = 300
+
+# User Select
+userselect.type = textfield
+userselect.label = userselect
+userselect.width = 300
+userselect.default = 1
+userselect.x = 200
+userselect.y = 250
+
+# Script
+script.type = textbox
+script.label = script
+script.width = 300
+script.height = 200
+script.x = 200
+script.y = 30
+
+
+cb.type = cancelbutton
+db.type = defaultbutton
+db.label = Create
+
+EOS
+
+if File.directory?('/Volumes/Pashua/Pashua.app')
+  # Looks like the Pashua disk image is mounted. Run from there.
+  custom_location = '/Volumes/Pashua'
+else
+  # Search for Pashua in the standard locations
+  custom_location = ''
+end
+
+# Get the icon from the application bundle
+icon_path = File.dirname(File.dirname(pashua_locate(custom_location))) + '/Resources/AppIcon@2.png'
+if File.exists?(icon_path)
+  config << "img.type = image
+  img.x = 0
+  img.y = 300
+  img.maxwidth = 175
+  img.tooltip = This is an element of type “image”
+  img.path = #{icon_path}"
+end
+
+res = pashua_run(config)
+
+#======================================================================================================
+# checking to see what was selected
+
+puts "#{res['folder']}"
+puts "#{res['command']}"
+puts "#{res['output']}"
+puts "#{res['user']}"
+puts "#{res['userselect']}"
+puts "#{res['script']}"
+
+
+#=== Create Commands ===================================================
+#out_file = File.new("/tmp/ad_results.txt", "w")
+#out_file.puts("#{res['script']}")
+#results=`perl -p -e 's/\n/[return]/g;' "/private/tmp/ad_results.txt"`
+
+script = "#{res['script']}".gsub("[return]", "\n")
+
+newcommand = ARD::Command.new(
+  "#{res['folder']}",
+  "#{res['command']}",
+  "#{res['output']}",
+  script,
+  "#{res['user']}",
+  "#{res['userselect']}")
+
+
+if ARD.list_folders.include?("#{res['folder']}")
+  ARD.create_command(newcommand)
+else
+  ARD.create_folder(newcommand)
+end
+
+
+#ARD.create_command(newcommand)
+#ARD.create_folder(newcommand)
