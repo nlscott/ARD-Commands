@@ -15,17 +15,17 @@ After require ARDplist.rb in your ruby file, you can run the command below to se
 puts ARD.list_options
 ```
 This will return:
-> create_command
-> create_folder
-> create_spacer
-> delete_command
-> delete_folder
-> folder_index
-> list_folders
-> move_folder
-> options
-> rename_command
-> rename_folder
+> - create_command
+> - create_folder
+> - create_spacer
+> - delete_command
+> - delete_folder
+> - folder_index
+> - list_folders
+> - move_folder
+> - options
+> - rename_command
+> - rename_folder
 
 
 
