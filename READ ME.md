@@ -9,5 +9,5 @@ This script assume a couple of things:
 #5 - it assumes you already have a file at ~/Library/Containers/com.apple.RemoteDesktop/Data/Library/Application Support/Remote Desktop/Presets/UnixCommandTask.plist, if you don’t open Apple Remote Desktop, click on “Unix” and save anything as your first command .. this auto generates the UnixCommandTask.plist file
 
 Usage:
-- Make sure your script to execute the commands and t ARDplist.rb are in the same directory
+- Make sure your script to execute the commands and the ARDplist.rb are in the same directory
 - Make sure at the top of your file you type: require './ARDplist' ... see ARDplist_usage for examples

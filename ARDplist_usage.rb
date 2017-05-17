@@ -46,7 +46,7 @@ ARD.create_folder(newcommand) #creates a new folder named "folder1" with a comma
 #ARD.rename_folder("folder1", "folder0")
 
 #Rename a command, arguments are ("folder_name", "orignialcommandname", "newcommandname")
-#ARD.rename_command("folder0", "command1", "command4")
+ARD.rename_command("Admin Commands", "list of users", "all users")
 
 #Delete a command, arguments ("folder_name", "command_name")
 #ARD.delete_command("folder2", "command1")

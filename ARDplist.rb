@@ -126,9 +126,9 @@ module ARD
 		indexnumber = indexnumber.to_i
 
 		command_indexnumber=nil
-		for x in @results[3]['state']
+		for x in @results[indexnumber]['state']
 			if x['name'] == "#{command_name}"
-				command_indexnumber = @results[2]['state'].index(x)
+				command_indexnumber = @results[indexnumber]['state'].index(x)
 			end
 		end
 
@@ -141,14 +141,13 @@ module ARD
 	def self.rename_command(folder_name, orignialcommandname, newcommandname)
 		indexnumber = folder_index("#{folder_name}")
 		indexnumber = indexnumber.to_i
-
+		
 		command_indexnumber=nil
-		for x in  @results[2]['state']
-			if x['name'] == orignialcommandname
-				command_indexnumber = @results[2]['state'].index(x)
+		for x in @results[indexnumber]['state']
+			if x['name'] == "#{orignialcommandname}"
+				command_indexnumber = @results[indexnumber]['state'].index(x)
 			end
-		end
-		command_indexnumber = command_indexnumber.to_i
+		end		
 
 		@results[indexnumber]['state'][command_indexnumber]['name'] = "#{newcommandname}"
 		@plist.value = CFPropertyList.guess(@results)
