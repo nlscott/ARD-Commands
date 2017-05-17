@@ -1,4 +1,4 @@
-#Scripts and app to help create and organize commands in Apple Remote Desktop
+Scripts and app to help create and organize commands in Apple Remote Desktop
 
 This script assume a couple of things:
 #1 - you have Apple Remote Installed on the local machine
