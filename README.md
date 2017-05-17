@@ -30,6 +30,7 @@ This will return:
 
 
 #### Examples: ..
+See [this blog post](https://redlinetech.wordpress.com/2017/05/17/organizing-commands-in-apple-remote-desktop-with-the-help-of-ruby/)
 
 #print exisintg commands and folders
 ```ruby 
