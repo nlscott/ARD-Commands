@@ -10,7 +10,9 @@
 * Make sure at the top of your file you type: require './ARDplist' ... see ARDplist_usage for examples
 
 #### Usage:
-After require ARDplist.rb in your ruby file, you can run the command below to see all your options.
+You must require 'ARDplist.rb' in your script before calling it.
+
+After you require ARDplist.rb in your ruby file, you can run the command below to see all your options.
 ```ruby
 puts ARD.list_options
 ```
@@ -22,6 +24,7 @@ This will return:
 > - delete_folder
 > - folder_index
 > - list_folders
+> - move_command
 > - move_folder
 > - options
 > - rename_command
@@ -32,73 +35,80 @@ This will return:
 #### Examples: ..
 See [this blog post](https://redlinetech.wordpress.com/2017/05/17/organizing-commands-in-apple-remote-desktop-with-the-help-of-ruby/)
 
-#print exisintg commands and folders
-```ruby 
+#Print exisintg commands and folders:
+```ruby
 puts.ARD.list_folders
 ```
-> returns any existing single commands or folders in ARD
+returns any existing single commands or folders in ARD
 
 ---
-#get the physical location of a folder
+#Get the physical location of a folder:
 ``` ruby
 puts ARD.folder_index("folder1")
 ```
-> returns the phyiscal position of folder "folder1" as an interger
+returns the phyiscal position of folder "folder1" as an interger
+
+---
+
+#Move existing command into folder:
+arguments are ("commandname", "folder to move to")
+```ruby
+ARD.move_command("Test Command", "Folder 1")
+```
+
 ---
 
 
-#move position of exisiting folder. arguments are (original_position, new_position)
+#Move position of exisiting folder:
+arguments are (original_position, new_position)
 ```ruby
 ARD.move_folder(1, 0)
 ```
 
 ---
 
-#rename an exisiting folder. arguments are (oldname, newname)
+#Rename an exisiting folder:
+arguments are (oldname, newname)
 ```ruby
 ARD.rename_folder("folder1", "folder0")
 ```
 ---
 
-#rename an existing command. arguments (folder_name, orignialcommandname, newcommandname)
+#Rename an existing command:
+arguments are (folder_name, orignialcommandname, newcommandname)
  ```ruby
  ARD.rename_command("folder0", "command2", "command1")
  ```
  ---
 
- #creates a visual space by using ----, arguments is physical location you want to create the spacer
+ #Create a visual space by using ----
+ arguments is physical location you want to create the spacer
  ```ruby
  ARD.create_spacer(1)
  ```
  ---
 
-#rename an exisiting folder. aguments are (oldname, newname)
+#Rename an exisiting folder:
+aguments are (oldname, newname)
 ```ruby
 ARD.rename_folder("folder1", "folder0")
 ```
 ---
-#Rename a command, arguments are ("folder_name", "orignialcommandname", "newcommandname")
+#Rename a command:
+arguments are ("folder_name", "orignialcommandname", "newcommandname")
 ```ruby
 ARD.rename_command("Admin Commands", "list of users", "all users")
 ```
 ---
-#Delete a command, arguments ("folder_name", "command_name")
+#Delete a command:
+arguments are ("folder_name", "command_name")
 ```ruby
 ARD.delete_command("folder2", "command1")
 ```
 ---
 
-#delete an exisiting folder, areguments are ("foldername")
+#Delete an exisiting folder
+areguments are ("foldername")
 ```ruby
 ARD.delete_folder("folder2")
 ```
-
-
-
-
-
-
-
-
-
-

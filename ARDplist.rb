@@ -158,4 +158,16 @@ module ARD
 		puts ARD.methods(false).sort
 	end
 
+	def self.move_command(command, move_to_folder)
+		puts "command location is: #{ARD.folder_index(command)}"
+		puts "folder location is: #{ARD.folder_index(move_to_folder)}"
+		puts @results[ARD.folder_index(command)]
+		@results[ARD.folder_index(move_to_folder)]["state"] << @results[ARD.folder_index(command)]
+		@plist.value = CFPropertyList.guess(@results)
+		@plist.save("#{PLISTFILE}", CFPropertyList::List::FORMAT_XML)
+		ARD.delete_folder(command)
+	end
+
 end
+
+puts ARD.move_command("test4", "test3")
