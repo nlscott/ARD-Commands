@@ -9,6 +9,8 @@
 * Make sure your script to execute the commands and the ARDplist.rb are in the same directory
 * Make sure at the top of your file you type: require './ARDplist' ... see ARDplist_usage for examples
 
+<img src="https://i1.wp.com/redlinetech.files.wordpress.com/2017/06/ard-compare-e1498534221453.png">
+
 #### Usage:
 You must require 'ARDplist.rb' in your script before calling it.
 
@@ -40,6 +42,14 @@ See [this blog post](https://redlinetech.wordpress.com/2017/05/17/organizing-com
 puts.ARD.list_folders
 ```
 returns any existing single commands or folders in ARD
+
+---
+
+#### Create a new empty folder
+argument is ("new_folder_name")
+```ruby
+ARD.create_empty_folder("folder1")
+```
 
 ---
 #### Get the physical location of a folder:

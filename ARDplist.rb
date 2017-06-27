@@ -165,6 +165,18 @@ module ARD
 		ARD.delete_folder(command)
 	end
 
+	def self.create_empty_folder(new_folder_name)
+		indexnumber = @results.count
+		indexnumber = indexnumber.to_i
+		data3=Hash.new
+		data3['name']="#{new_folder_name}"
+		@results.push(data3)
+		state = Array.new
+		@results[indexnumber]["state"] = state
+		@plist.value = CFPropertyList.guess(@results)
+		@plist.save("#{PLISTFILE}", CFPropertyList::List::FORMAT_XML)
+	end
+
 end
 
 
