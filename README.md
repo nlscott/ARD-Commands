@@ -16,7 +16,7 @@ You must require 'ARDplist.rb' in your script before calling it.
 
 After you require ARDplist.rb in your ruby file, you can run the command below to see all your options.
 ```ruby
-puts ARD.list_options
+puts ARD.options
 ```
 This will return:
 > - create_command
